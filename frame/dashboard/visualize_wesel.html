@@ -1,0 +1,84 @@
+{% extends 'ink/base.html' %} {% block title %}My Dashboard {% endblock %}
+{%block content %}
+<div class="row">
+  <div class="border p-3 shadow">
+    <h3 class="text-center">{{city}}</h3>
+  </div>
+  <br />
+  <hr />
+  <div class="col-md-12">
+    <div>
+      <canvas id="myChart"></canvas>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <script>
+      const ctx = document.getElementById("myChart");
+
+      new Chart(ctx, {
+        type: "line",
+        data: {
+          labels: [{% for data in cdata %} '{{ data }}', {% endfor %}],
+          datasets: [
+            {
+              label: "# per mg/l",
+              data: [{% for data in value %} '{{ data }}', {% endfor %}],
+              borderWidth: 1,
+            },
+          ],
+        },
+        options: {
+          scales: {
+            y: {
+              beginAtZero: true,
+            },
+          },
+        },
+      });
+    </script>
+  </div>
+</div>
+{{ df }}
+
+<br />
+<br style="margin-top: 5%" />
+<div class="row">
+  <!--code for table-->
+  <div class="col-md-6">
+    <div class="border p-3 shadow">
+      <div class="row justify-content-center">
+        <div class="col-auto">
+          <table id="mytable" class="table table-striped" style="width: 100%">
+            <thead>
+              <tr>
+                <th>Date</th>
+                <th>City Name</th>
+                <th>filterlaenge_cm</th>
+                <th>messergebnis_cm</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for data in cdata %}
+              <tr>
+                <td>{{data}}</td>
+
+                <td>{{city}}</td>
+                <td>data</td>
+                <td>data</td>
+                <td>'data'</td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-6">
+    <div class="border p-3 shadow">
+      <h3>Geomap</h3>
+    </div>
+  </div>
+</div>
+{% include 'ink/footer.html' %} {% endblock %}

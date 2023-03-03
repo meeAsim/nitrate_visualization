@@ -1,0 +1,40 @@
+{% extends 'ink/base.html' %} {% block title %}My Dashboard {% endblock %}
+{%block content %}
+<div class="row">
+  <div class="col-md-4">
+    <div class="border p-3 shadow">
+      <h3>Kleve</h3>
+      <form action="/visualKleve" method="POST">
+        {% csrf_token %}
+           
+       <label for="city"><h5>Cities</h5></label>
+  <select id="city" name="city">
+    <option value="nodata">Select a city:</option>
+    {% for name in list %}
+    
+    <option value="{{ name }}"> {{ name }} </option>
+     {% endfor %}
+  </select>
+  <input type="submit">
+</form>   
+      </form>
+    </div>
+  </div>
+  <div class="col-md-8">
+    <br>
+    <div class="image-fluid" style="border: 1px solid black;">
+      <br>
+      <img src="https://imgs.search.brave.com/EqVQpJuhGoTCgqbhGra2SFjO177CajrxQJPDx8iZVDQ/rs:fit:266:400:1/g:ce/aHR0cDovL3d3dy5z/dGFkdHJhbmcuZGUv/bnJ3L3JlZ2llcnVu/Z3NiZXppcmstZHVl/c3NlbGRvcmYva3Jl/aXMta2xldmUucG5n" class="img-fluid rounded mx-auto d-block" alt="Kries-Kleve">
+      <br> 
+      <p style="text-align: center;"><span style="font-weight: 700;"> source:</span> stadtrang</p>
+    </div>
+
+    
+  </div>
+</div>
+<br> <br>
+{{ df }} 
+
+
+{% include 'ink/footer.html' %}
+{% endblock %}
