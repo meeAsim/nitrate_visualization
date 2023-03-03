@@ -57,17 +57,11 @@ def visualKleve(request):
     kleveDate = kleveCityData.mdate.loc[kleveCityData.cdata['name'] == city2]
     kleveDate = kleveDate.str.replace("00:00:00", " " )
 
-    # cleanDate_list= []
-    # cleantTime_list= []
-    # for date in kleveDate:
-    #  cleanDate = str(date).split(' ',1)
-    #  cleanDate_list.append(cleanDate)
-    #  cleantTime_list.append(cleanDate)
+   
     df = pd.read_csv('./kleveArea.csv')
 
     cleanTime_list = df['datum_pn'].str.replace("00:00:00", " " )
-    # cleanTime_list = cleanTime_list.str.replace(r"[\"\',]", '')
-    # cleanTime_list = pd.to_datetime(pd.Series(df['datum_pn']), format="%Y/%m/%d")
+    
 
      
     
@@ -101,23 +95,7 @@ def visualKleve(request):
     } 
     return render(request, 'dashboard/visualize.html', kleveCityDataa )
 
-# code for map
 
-# def map(request):
-   
-#     data = pd.read_csv('./de.csv')
-#     fig = plot.scatter_geo(data, lat='lat', lon='lng', hover_name='city')
-#     fig.show()
-
-#     # mtp.scatter(x=data['lat'], y= data['lng'])
-#     # mtp.rcParams['figure.figsize'] = (50,30)
-#     # fig = mtp.show()
-    
-#     map = {
-#         'map':fig
-#     }
-
-#     return render(request, 'dashboard/map.html',map)
 
 def map(request):
    
@@ -131,10 +109,7 @@ def map(request):
     fig = plot.scatter_geo(data, lat = data['lat'], lon = data['long'], scope='europe', color = 'name')
     fig.show()
 
-    # mtp.scatter(x=data['lat'], y= data['lng'])
-    # mtp.rcParams['figure.figsize'] = (50,30)
-    # fig = mtp.show()
-    
+  
     map = {
         'map':fig
     }

@@ -6,8 +6,7 @@ import pandasql as ps
 # Create your models here.
 
 class CityData(models.Model):
-    # City = models.CharField(max_length=200)
-    # Nvalue= models.FloatField()
+   
     data = pd.read_csv('./weselArea.csv')
 
     Cname = data['name'].drop_duplicates()
