@@ -115,21 +115,17 @@
       // alert(rowCount);
       var i;
       for (i = 1; i < rowCount; i++) {
-        result = document.getElementById("mytable").rows[i].cells[3].innerHTML;
-        if (result == "=") {
-          document.getElementById("mytable").rows[i].cells[3].style.background =
-            "teal";
-          document.getElementById("mytable").rows[i].cells[3].style.color =
-            "teal";
-        } else if (result == "&lt;") {
-          document.getElementById("mytable").rows[i].cells[3].style.background =
+        result = document.getElementById("mytable").rows[i].cells[2].innerHTML;
+        if (result * 100000 <= 50 * 100000) {
+          document.getElementById("mytable").rows[i].cells[4].style.background =
             "green";
-          document.getElementById("mytable").rows[i].cells[3].style.color =
+          document.getElementById("mytable").rows[i].cells[4].style.color =
             "green";
         } else {
-          document.getElementById("mytable").rows[i].cells[3].style.background =
+          document.getElementById("mytable").rows[i].cells[4].style.background =
             "red";
         }
+        // alert(result);
       }
     </script>
   </body>

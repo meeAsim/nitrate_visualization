@@ -63,14 +63,11 @@
               </h3>
               <div class="d-flex">
                 <ul class="list-group list-group-horizontal">
-                  <li class="list-group-item" style="background-color: red">
-                    High
-                  </li>
-                  <li class="list-group-item" style="background-color: teal">
-                    Neutral
-                  </li>
                   <li class="list-group-item" style="background-color: green">
-                    Low
+                    Drinkable
+                  </li>
+                  <li class="list-group-item" style="background-color: red">
+                    Undrinkable
                   </li>
                 </ul>
               </div>
@@ -85,8 +82,11 @@
                     <tr>
                       <th>Date</th>
                       <th>City Name</th>
+
                       <th>Value</th>
+                      <th>masseinheit</th>
                       <th>Result</th>
+                      <th>beobachtung_wasserstand</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -96,8 +96,10 @@
 
                       <td>{{i.name}}</td>
 
-                      <td>{{i.messergebnis_c}} mg/l</td>
-                      <td id="result">{{i.messergebnis_cm}}</td>
+                      <td>{{i.messergebnis_c}}</td>
+                      <td>mg/l</td>
+                      <td id="result"></td>
+                      <td>{{i.beobachtung_wasserstand}}</td>
                     </tr>
                     {% endfor %} {% endif %}
                   </tbody>
