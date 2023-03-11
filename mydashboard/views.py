@@ -27,8 +27,17 @@ def wesel(request):
 
 def kleve(request):
     kleveCityList = kleveMain.kleveCity
+    main= pd.read_csv('./kleveArea.csv')
+    sts = main.describe()
+
+    json_data = sts.reset_index().to_json(orient ='records')
+    myjson = json_data
+    data = []
+    data = json.loads(myjson)
+    # print(data)
     context = {
-        'list' : kleveCityList
+        'list' : kleveCityList,
+        'data' : data
     }
     return render(request,'dashboard/kleve.html', context)
 
@@ -106,10 +115,21 @@ def map(request):
 
     data[['lat','long']] = data[['e32','n32']].apply(getUTMs , axis=1)
     # fig = plot.scatter_geo(data, lat='lat', lon='lng', hover_name='city')
-    fig = plot.scatter_geo(data, lat = data['lat'], lon = data['long'], scope='europe', color = 'name')
-    fig.show()
+    fig = plot.scatter_mapbox(
+    data,  
+    lat='lat',
+    lon='long',
+    center={"lat": 50.775555, "lon": 6.083611}, 
+    width=1024,  
+    height=720,  
+    color='messergebnis_c',
+    hover_data=["name"],  
+        )
 
-  
+    fig.update_layout(mapbox_style="open-street-map")
+
+    fig.show()
+   
     map = {
         'map':fig
     }
@@ -117,25 +137,21 @@ def map(request):
     return render(request, 'dashboard/map.html',map)
 
 
-#making table using jso data
 
-def tabData(request):
-    city2 = str(request.POST['city'])
+
+
+def sts_data(request):
     main= pd.read_csv('./kleveArea.csv')
-    main_json = main.loc[main['name']== city2]
-    mesDate = main['messergebnis_c'].loc[main['name']== city2]
-    conClusion = main['messergebnis_cm'].loc[main['name']== city2]
-    # maindata =[mesDate], conClusion]
+    sts = main.describe()
 
-  
-    # json format ma data fatch.
-    json_data = main_json.reset_index().to_json(orient ='records')
+    json_data = sts.reset_index().to_json(orient ='records')
     myjson = json_data
     data = []
     data = json.loads(myjson)
     context = {'d': data}
     print('this is data fron d : ', data)
-  
-    return render(request, 'dashboard/visualize.html', context)
+
+    return render(request, '')
+
 
  
